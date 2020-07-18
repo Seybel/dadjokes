@@ -1,11 +1,22 @@
 <template>
-  <div>jokes</div>
+<div>
+  <SearchJoke v-on:search-text="searchText" />
+  <Joke v-for="joke in jokes" :key="joke.id"
+  :id="joke.id" :joke="joke.joke"
+  />
+</div>
 </template>
 
 <script>
 import axios from 'axios'
+import Joke from '../../components/Joke'
+import SearchJoke from '../../components/SearchJoke'
 
 export default {
+components: {
+    SearchJoke,
+    Joke
+},
 data() {
     return {
         jokes: []
@@ -23,11 +34,25 @@ methods: {
         }
 
         try {
-           const { res } = await axios.get('https://icanhazdadjoke.com/search', config)
-           console.log(res)
-            // this.jokes = res
+           const res  = await axios.get('https://icanhazdadjoke.com/search', config)
+           console.log(res.data)
+            this.jokes = res.data.results
         } catch (error) {
-            console.error(error)
+            console.log(`API: ${error}`)
+        }
+    },
+    async searchText(text) {
+        const config = {
+            headers: {
+                'Accept': 'application/json'
+            }
+        }
+
+        try {
+           const res  = await axios.get(`https://icanhazdadjoke.com/search?term=${text}`, config)
+            this.jokes = res.data.results
+        } catch (error) {
+            console.log(`API: ${error}`)
         }
     }
 },
