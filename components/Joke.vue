@@ -4,7 +4,6 @@
             <div class="joke">
                 {{ joke }}
             </div>
-            <!-- <small>{{id}}</small> -->
         </nuxt-link>
     </div>
 </template>
@@ -12,7 +11,7 @@
 <script>
 export default {
     name: 'Joke',
-    props: ['joke', 'id']
+    props: ['joke', 'id'],
 }
 </script>
 

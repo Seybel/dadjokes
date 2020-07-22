@@ -1,8 +1,10 @@
 <template>
-  <form @submit.prevent="onSubmit">
-    <input type="text" placeholder="Search Jokes..." v-model="text">
-    <input type="submit" value="search">
+<div class="search">
+    <form @submit.prevent="onSubmit">
+      <input type="text" placeholder="Search Jokes..." v-model="text">
+      <input type="submit" value="search">
   </form>
+</div>
 </template>
 
 <script>
@@ -21,5 +23,9 @@ methods: {
 </script>
 
 <style>
-
+div.search {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
 </style>
